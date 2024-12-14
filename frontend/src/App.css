@@ -1,0 +1,68 @@
+.App {
+  background-size: 100vw 100vh;
+  text-align: center;
+  background-color: #d16b6b;
+  min-height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  border-bottom: solid 5px #f10829;
+  min-height: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.nav-tabs {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.nav-tab {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-tab a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+.nav-tab a:hover {
+    background-color: #ddd;
+}
+
+.nav-tab a:focus {
+    background-color: #fff;
+    border-top: 2px solid #007bff;
+    color: #007bff;
+}

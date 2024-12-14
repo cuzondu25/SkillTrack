@@ -43,5 +43,5 @@ def login():
         return jsonify({"message": "Invalid username or password"}), 401
 
     # Generate token
-    token = create_access_token(identity=username)
+    token = create_access_token(identity=user['id'])
     return jsonify({"token": token}), 200

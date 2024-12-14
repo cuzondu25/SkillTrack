@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS roles (
 );
 
 -- Insert default roles
-INSERT INTO roles (role_name) VALUES ('admin'), ('user');
+INSERT IGNORE INTO roles (role_name) VALUES ('admin'), ('user');
 
 -- Create the users table
 CREATE TABLE IF NOT EXISTS users (

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from routes.auth import auth_bp
+from routes.course import course_bp
 from services.db import get_db_connection
 from flask_cors import CORS
 
@@ -10,6 +11,7 @@ jwt = JWTManager(app)
 
 CORS(app)
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
+app.register_blueprint(course_bp, url_prefix='/api/course')
 print(app.url_map)
 
 

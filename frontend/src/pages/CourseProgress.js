@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getProgress, updateProgress } from '../api/progress';
 
-const CourseProgress = ({ courseId }) => {
+const CourseProgress = () => {
+    const { courseId } = useParams();
     const [progress, setProgress] = useState({});
     const token = localStorage.getItem('token');
 

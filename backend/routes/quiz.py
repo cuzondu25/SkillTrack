@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 quiz_bp = Blueprint('quiz', __name__)
 
-@quiz_bp.route('/quiz/<int:course_id>', methods=['GET'])
+@quiz_bp.route('/<int:course_id>', methods=['GET'])
 @jwt_required()
 def get_quiz(course_id):
     connection = get_db_connection()
@@ -20,7 +20,7 @@ def get_quiz(course_id):
 
     return jsonify(quizzes), 200
 
-@quiz_bp.route('/quiz/submit', methods=['POST'])
+@quiz_bp.route('/submit', methods=['POST'])
 @jwt_required()
 def submit_quiz():
     data = request.get_json()

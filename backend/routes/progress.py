@@ -4,7 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 progress_bp = Blueprint('progress', __name__)
 
-@progress_bp.route('/progress/<int:course_id>', methods=['GET'])
+@progress_bp.route('/<int:course_id>', methods=['GET'])
 @jwt_required()
 def get_progress(course_id):
     user_id = get_jwt_identity()
@@ -24,7 +24,7 @@ def get_progress(course_id):
 
     return jsonify(progress), 200
 
-@progress_bp.route('/progress/update', methods=['POST'])
+@progress_bp.route('/update', methods=['POST'])
 @jwt_required()
 def update_progress():
     data = request.get_json()

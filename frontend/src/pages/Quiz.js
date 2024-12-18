@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchQuiz, submitQuiz } from '../api/quiz';
 
-const Quiz = ({ courseId }) => {
+const Quiz = () => {
+    const { courseId } = useParams();
     const [quiz, setQuiz] = useState([]);
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [message, setMessage] = useState('');

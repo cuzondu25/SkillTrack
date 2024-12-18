@@ -3,7 +3,7 @@ import Axios from 'axios';
 const API_URL = 'http://localhost:5000/api/quiz';
 
 export const fetchQuiz = async (courseId, token) => {
-    const response = await Axios.get(`${API_URL}/quiz/${courseId}`, {
+    const response = await Axios.get(`${API_URL}/${courseId}`, {
         headers: { Authorization: `Bearer ${token}` },
     });
     return response.data;
@@ -11,7 +11,7 @@ export const fetchQuiz = async (courseId, token) => {
 
 export const submitQuiz = async (quizId, selectedAnswer, token) => {
     const response = await Axios.post(
-        `${API_URL}/quiz/submit`,
+        `${API_URL}/submit`,
         { quiz_id: quizId, selected_answer: selectedAnswer },
         { headers: { Authorization: `Bearer ${token}` } }
     );

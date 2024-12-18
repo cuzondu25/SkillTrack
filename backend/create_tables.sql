@@ -71,3 +71,13 @@ CREATE TABLE IF NOT EXISTS quiz_answers (
     FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- Table to store course study materials
+CREATE TABLE IF NOT EXISTS course_materials (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    course_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    material_type ENUM('pdf', 'video', 'link') NOT NULL,
+    material_url TEXT NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+);

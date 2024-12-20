@@ -9,7 +9,7 @@ const CourseProgress = () => {
 
     useEffect(() => {
         const fetchProgress = async () => {
-            const data = await getProgress(courseId, token);
+            const data = await getProgress(token);
             setProgress(data);
         };
         fetchProgress();
@@ -17,16 +17,16 @@ const CourseProgress = () => {
 
     const handleProgressUpdate = async (completed) => {
         await updateProgress(courseId, completed, token);
-        setProgress({ ...progress, lesson_completed: completed });
+        setProgress({ ...progress, courses_completed: completed });
     };
 
     return (
         <div>
             <h2>Course Progress</h2>
-            <p>Lessons Completed: {progress.lesson_completed || 0} / {progress.total_lessons || 0}</p>
+            <p>Lessons Completed: {progress.courses_completed || 0} / {progress.total_courses || 0}</p>
             <progress value={progress.progress_percentage || 0} max="100"></progress>
-            <button onClick={() => handleProgressUpdate(progress.lesson_completed + 1)}>
-                Mark Next Lesson Complete
+            <button onClick={() => handleProgressUpdate(progress.courses_completed + 1)}>
+                Course Completed!!!
             </button>
         </div>
     );

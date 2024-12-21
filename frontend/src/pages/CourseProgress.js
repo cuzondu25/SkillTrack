@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { getProgress, updateProgress } from '../api/progress';
+import { getProgress } from '../api/progress';
 
 const CourseProgress = () => {
-    const { courseId } = useParams();
     const [progress, setProgress] = useState({});
     const token = localStorage.getItem('token');
 
@@ -13,21 +11,23 @@ const CourseProgress = () => {
             setProgress(data);
         };
         fetchProgress();
-    }, [courseId, token]);
-
-    const handleProgressUpdate = async (completed) => {
-        await updateProgress(courseId, completed, token);
-        setProgress({ ...progress, courses_completed: completed });
-    };
+    }, [token]);
 
     return (
-        <div>
-            <h2>Course Progress</h2>
-            <p>Lessons Completed: {progress.courses_completed || 0} / {progress.total_courses || 0}</p>
+        <div style={{
+            position: 'fixed',
+            top: '10px',
+            right: '10px',
+            padding: '10px',
+            backgroundColor: '#007bff',
+            color: 'white',
+            borderRadius: '5px',
+            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
+        }}>
+            <p style={{ margin: 0 }}>
+                <strong>Progress:</strong> {progress.courses_completed || 0} / {progress.total_courses || 0}
+            </p>
             <progress value={progress.progress_percentage || 0} max="100"></progress>
-            <button onClick={() => handleProgressUpdate(progress.courses_completed + 1)}>
-                Course Completed!!!
-            </button>
         </div>
     );
 };

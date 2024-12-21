@@ -40,18 +40,6 @@ CREATE TABLE IF NOT EXISTS enrollments (
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
--- Create progress tracking table
-CREATE TABLE IF NOT EXISTS progress (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL UNIQUE,
-    updated_course_id INT NOT NULL,
-    courses_completed INT DEFAULT 0,
-    total_courses INT DEFAULT 0,
-    progress_percentage DECIMAL(5, 2) AS (courses_completed / total_courses * 100) STORED,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (updated_course_id) REFERENCES courses(id) ON DELETE CASCADE
-);
-
 -- Create quizzes table
 CREATE TABLE IF NOT EXISTS quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -95,31 +83,3 @@ CREATE TABLE IF NOT EXISTS course_materials (
     material_url TEXT NOT NULL,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
-
-DELIMITER $$
-DROP TRIGGER IF EXISTS `progress_tracking`$$
-CREATE TRIGGER `progress_tracking` AFTER INSERT
-ON enrollments FOR EACH ROW
-BEGIN
-    INSERT IGNORE INTO progress(user_id, updated_course_id)
-    VALUES(NEW.user_id, NEW.course_id);
-    UPDATE progress SET total_courses = total_courses + 1
-    WHERE user_id = NEW.user_id;
-END$$
-
-DROP TRIGGER IF EXISTS `update_course_progress`$$
-CREATE TRIGGER `update_course_progress` AFTER UPDATE
-ON progress FOR EACH ROW
-BEGIN
-    DECLARE score INT;
-    IF NEW.courses_completed != OLD.courses_completed THEN
-        SELECT COUNT(is_correct) INTO score
-        FROM quiz_answers
-        WHERE user_id=userId and course_id=courseId and is_correct=TRUE;
-        
-        INSERT INTO course_progress (user_id, course_id, is_completed, quiz_score)
-        VALUES (NEW.user_id, NEW.updated_course_id, TRUE, score);
-    END IF;
-END$$
-
-DELIMITER ;

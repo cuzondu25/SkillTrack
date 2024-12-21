@@ -11,18 +11,32 @@ def get_progress():
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
+    # Fetch total courses and completed courses
     cursor.execute("""
-        SELECT courses_completed, total_courses, progress_percentage
-        FROM progress
+        SELECT COUNT(*) AS total_courses FROM enrollments
         WHERE user_id = %s
     """, (user_id))
-    progress = cursor.fetchone()
+    total_courses = cursor.fetchone()['total_courses']
+
+    cursor.execute("""
+        SELECT COUNT(*) AS courses_completed FROM course_progress
+        WHERE user_id = %s AND is_completed = TRUE
+    """, (user_id,))
+    courses_completed = cursor.fetchone()['courses_completed']
+
     connection.close()
 
-    if not progress:
-        return jsonify({"message": "No progress found for this user"}), 404
+    if total_courses > 0:
+        progress_percentage = (courses_completed / total_courses) * 100
+    else:
+        progress_percentage = 0
 
-    return jsonify(progress), 200
+    return jsonify({
+        "total_courses": total_courses,
+        "courses_completed": courses_completed,
+        "progress_percentage": progress_percentage
+    }), 200
+
 
 @progress_bp.route('/update', methods=['POST'])
 @jwt_required()
@@ -30,17 +44,25 @@ def update_progress():
     data = request.get_json()
     user_id = get_jwt_identity()
     course_id = data.get('course_id')
-    courses_completed = data.get('courses_completed')
+    is_completed = data.get('is_completed')
 
     connection = get_db_connection()
     cursor = connection.cursor()
 
     cursor.execute("""
-        UPDATE progress
-        SET courses_completed = %s
-        SET updated_course_id = %s
-        WHERE user_id = %s
-    """, (courses_completed, course_id, user_id))
+        SELECT COUNT(is_correct) AS score
+        FROM quiz_answers
+        WHERE user_id = %s and course_id = %s and is_correct = TRUE
+    """, (user_id, course_id))
+
+    score = cursor.fetchone()['score']
+
+    cursor.execute("""
+        INSERT INTO course_progress
+        (user_id, course_id, is_completed, quiz_score)
+        VALUES (%s, %s, %s, %s)
+     """, (user_id, course_id, is_completed, score))
+
     connection.commit()
     connection.close()
 

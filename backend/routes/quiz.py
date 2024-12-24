@@ -26,6 +26,7 @@ def submit_quiz():
     data = request.get_json()
     user_id = get_jwt_identity()
     quiz_id = data.get('quiz_id')
+    course_id = data.get('course_id')
     selected_answer = data.get('selected_answer')
 
     connection = get_db_connection()
@@ -36,9 +37,10 @@ def submit_quiz():
     is_correct = (selected_answer == correct_answer)
 
     cursor.execute("""
-        INSERT INTO quiz_answers (quiz_id, user_id, selected_answer, is_correct)
-        VALUES (%s, %s, %s, %s)
-    """, (quiz_id, user_id, selected_answer, is_correct))
+        INSERT IGNORE INTO quiz_answers
+        (quiz_id, user_id, course_id, selected_answer, is_correct)
+        VALUES (%s, %s, %s, %s, %s)
+    """, (quiz_id, user_id, course_id, selected_answer, is_correct))
     connection.commit()
     connection.close()
 

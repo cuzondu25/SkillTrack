@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchQuiz, submitQuiz } from '../api/quiz';
+import { updateProgress } from '../api/progress';
 
 const Quiz = () => {
     const { courseId } = useParams();
+    const navigate = useNavigate();
     const [quiz, setQuiz] = useState([]);
     const [selectedAnswer, setSelectedAnswer] = useState('');
     const [message, setMessage] = useState('');
@@ -22,6 +24,12 @@ const Quiz = () => {
         setMessage(response.is_correct ? 'Correct!' : 'Incorrect.');
     };
 
+    const handleCompleteCourse = async () => {
+        await updateProgress({ course_id: courseId, is_completed: true }, token);
+        alert('Course marked as completed!');
+        navigate('/courses');
+    };
+
     return (
         <div>
             <h2>Quiz</h2>
@@ -38,6 +46,14 @@ const Quiz = () => {
                 </div>
             ))}
             {message && <p>{message}</p>}
+
+            {/* Course Completed Button */}
+            <button
+                style={{ marginTop: '20px', backgroundColor: '#28a745', color: 'white' }}
+                onClick={handleCompleteCourse}
+            >
+                Course Completed!
+            </button>
         </div>
     );
 };

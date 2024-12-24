@@ -23,7 +23,7 @@ def register():
     connection.commit()
     connection.close()
 
-    return jsonify({"message": "User registered successfully"}), 201
+    return jsonify({"message": "User registration successful! Please log in"}), 201
 
 @auth_bp.route('/login', methods=['POST'])
 def login():

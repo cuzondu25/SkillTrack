@@ -18,7 +18,7 @@ export const enrollInCourse = async (courseId, token) => {
 
 export const fetchEnrolledCourses = async (token) => {
     const response = await Axios.get(`${API_URL}/courses/enrolled`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
 };

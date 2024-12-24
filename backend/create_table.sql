@@ -40,6 +40,18 @@ CREATE TABLE IF NOT EXISTS enrollments (
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
+-- Create progress tracking table
+CREATE TABLE IF NOT EXISTS progress (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    course_id INT NOT NULL,
+    lesson_completed INT DEFAULT 0,
+    total_lessons INT NOT NULL,
+    progress_percentage DECIMAL(5, 2) AS (lesson_completed / total_lessons * 100) STORED,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+);
+
 -- Create quizzes table
 CREATE TABLE IF NOT EXISTS quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,26 +64,12 @@ CREATE TABLE IF NOT EXISTS quizzes (
 -- Create quiz_answers table
 CREATE TABLE IF NOT EXISTS quiz_answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    quiz_id INT NOT NULL UNIQUE,
+    quiz_id INT NOT NULL,
     user_id INT NOT NULL,
-    course_id INT NOT NULL,
     selected_answer TEXT NOT NULL,
     is_correct BOOLEAN,
     FOREIGN KEY (quiz_id) REFERENCES quizzes(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
-);
-
--- Create table to manage courses completion
-CREATE TABLE IF NOT EXISTS course_progress (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    course_id INT NOT NULL,
-    is_completed BOOLEAN DEFAULT FALSE,
-    quiz_score INT DEFAULT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    UNIQUE (course_id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 -- Table to store course study materials

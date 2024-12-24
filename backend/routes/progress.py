@@ -15,7 +15,7 @@ def get_progress():
     cursor.execute("""
         SELECT COUNT(*) AS total_courses FROM enrollments
         WHERE user_id = %s
-    """, (user_id))
+    """, (user_id,))
     total_courses = cursor.fetchone()['total_courses']
 
     cursor.execute("""
@@ -47,18 +47,28 @@ def update_progress():
     is_completed = data.get('is_completed')
 
     connection = get_db_connection()
-    cursor = connection.cursor()
+    cursor = connection.cursor(dictionary=True)
 
     cursor.execute("""
-        SELECT COUNT(is_correct) AS score
+        SELECT COUNT(question) AS total_questions
+        FROM quizzes
+        WHERE course_id = %s
+    """, (course_id,))
+
+    total_questions = cursor.fetchone()['total_questions']
+
+    cursor.execute("""
+        SELECT COUNT(is_correct) AS total_correct_answers
         FROM quiz_answers
         WHERE user_id = %s and course_id = %s and is_correct = TRUE
     """, (user_id, course_id))
 
-    score = cursor.fetchone()['score']
+    total_correct_answers = cursor.fetchone()['total_correct_answers']
+    score = (total_correct_answers / total_questions) * 100
+
 
     cursor.execute("""
-        INSERT INTO course_progress
+        INSERT IGNORE INTO course_progress
         (user_id, course_id, is_completed, quiz_score)
         VALUES (%s, %s, %s, %s)
      """, (user_id, course_id, is_completed, score))

@@ -10,8 +10,10 @@ from services.db import get_db_connection
 from flask_cors import CORS
 
 app = Flask(__name__)
+
+# initialization and configuration of flask JWT EXTENDED
 app.config['JWT_SECRET_KEY'] = '97962511-0742-4506-a8e1-0de9867c563c'
-#app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=3)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=10)
 jwt = JWTManager(app)
 
 CORS(app)

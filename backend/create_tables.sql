@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS quizzes (
 -- Create quiz_answers table
 CREATE TABLE IF NOT EXISTS quiz_answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    quiz_id INT NOT NULL,
+    quiz_id INT NOT NULL UNIQUE,
     user_id INT NOT NULL,
     course_id INT NOT NULL,
     selected_answer TEXT NOT NULL,

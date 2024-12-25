@@ -1,33 +1,91 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import CourseList from './pages/CourseList';
-import CourseProgress from './pages/CourseProgress';
-import EnrolledCourses from './pages/EnrolledCourses';
-import CourseMaterials from './pages/CourseMaterials';
-import CompletedCourses from './pages/CompletedCourses';
-import Quiz from './pages/Quiz';
+import { useAuth } from './context/AuthContext'; // Auth context
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Register from './components/Register';
+import CourseList from './components/CourseList';
+import CourseProgress from './components/CourseProgress';
+import EnrolledCourses from './components/EnrolledCourses';
+import CourseMaterials from './components/CourseMaterials';
+import CompletedCourses from './components/CompletedCourses';
+import Quiz from './components/Quiz';
+import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 
 function App() {
-    return (
-        <Router>
-            <div>
-	        <CourseProgress /> {/* Fixed progress tag */}
-                <Routes>
-                    {/* Public Routes */}
-                    <Route path="/" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
+    const { user } = useAuth(); // Get user state from Auth Context
 
-                    {/* Protected Routes */}
-                    <Route path="/courses" element={<CourseList />} />
-                    <Route path="/courses/enrolled" element={<EnrolledCourses />} />
-                    <Route path="/courses/:courseId/materials" element={<CourseMaterials />} />
-                    <Route path="/courses/:courseId/quiz" element={<Quiz />} />
-	            <Route path="/courses/completed" element={<CompletedCourses />} />
-                </Routes>
-            </div>
-        </Router>
+    return (
+        <div className='App'>
+            <header>
+                <h1>SkillTrack</h1>
+            </header>
+            <main>
+                <Router>
+                    <div>
+                        {/* Only render CourseProgress if the user is logged in */}
+                        {user && <CourseProgress />}
+
+                        <Routes>
+                            {/* Public Routes */}
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+
+                            {/* Protected Routes */}
+                            <Route
+                                path="/courses"
+                                element={
+                                    <ProtectedRoute>
+                                        <CourseList />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/courses/enrolled"
+                                element={
+                                    <ProtectedRoute>
+                                        <EnrolledCourses />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/courses/:courseId/materials"
+                                element={
+                                    <ProtectedRoute>
+                                        <CourseMaterials />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/courses/:courseId/quiz"
+                                element={
+                                    <ProtectedRoute>
+                                        <Quiz />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/courses/completed"
+                                element={
+                                    <ProtectedRoute>
+                                        <CompletedCourses />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/logout"
+                                element={
+                                    <ProtectedRoute>
+                                        <Logout />
+                                    </ProtectedRoute>
+                                }
+                            />
+                        </Routes>
+                    </div>
+                </Router>
+            </main>
+        </div>
     );
 }
 

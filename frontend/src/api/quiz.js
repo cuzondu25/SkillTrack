@@ -9,10 +9,10 @@ export const fetchQuiz = async (courseId, token) => {
     return response.data;
 };
 
-export const submitQuiz = async (quizId, selectedAnswer, token) => {
+export const submitQuiz = async (quizId, courseId, selectedAnswer, token) => {
     const response = await Axios.post(
         `${API_URL}/submit`,
-        { quiz_id: quizId, selected_answer: selectedAnswer },
+        { quiz_id: quizId, course_id: courseId, selected_answer: selectedAnswer },
         { headers: { Authorization: `Bearer ${token}` } }
     );
     return response.data;

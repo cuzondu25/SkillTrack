@@ -3,7 +3,7 @@ import Axios from 'axios';
 const API_URL = 'http://localhost:5000/api/progress';
 
 export const getProgress = async (token) => {
-    const response = await Axios.get(`${API_URL}`, {
+    const response = await Axios.get(`${API_URL}/`, {
         headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;

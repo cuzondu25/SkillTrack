@@ -11,7 +11,7 @@ def get_quiz(course_id):
     cursor = connection.cursor(dictionary=True)
 
     cursor.execute("""
-        SELECT id, question
+        SELECT id, question, option_A, option_B, option_C, option_D
         FROM quizzes
         WHERE course_id = %s
     """, (course_id,))
@@ -25,23 +25,24 @@ def get_quiz(course_id):
 def submit_quiz():
     data = request.get_json()
     user_id = get_jwt_identity()
-    quiz_id = data.get('quiz_id')
     course_id = data.get('course_id')
-    selected_answer = data.get('selected_answer')
+    selected_answers = data.get('selected_answers')
 
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
-    cursor.execute("SELECT correct_answer FROM quizzes WHERE id = %s", (quiz_id,))
-    correct_answer = cursor.fetchone().get('correct_answer')
-    is_correct = (selected_answer == correct_answer)
+    for quiz_id, selected_answer in selected_answers.items():
+        cursor.execute("SELECT correct_answer FROM quizzes WHERE id = %s", (quiz_id,))
+        correct_answer = cursor.fetchone().get('correct_answer')
+        is_correct = (selected_answer == correct_answer)
 
-    cursor.execute("""
-        INSERT IGNORE INTO quiz_answers
-        (quiz_id, user_id, course_id, selected_answer, is_correct)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (quiz_id, user_id, course_id, selected_answer, is_correct))
+        cursor.execute("""
+            INSERT IGNORE INTO quiz_answers
+            (quiz_id, user_id, course_id, selected_answer, is_correct)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (quiz_id, user_id, course_id, selected_answer, is_correct))
+    
     connection.commit()
     connection.close()
 
-    return jsonify({"message": "Quiz submitted", "is_correct": is_correct}), 201
+    return jsonify({"message": "Quiz submitted successfully"}), 201

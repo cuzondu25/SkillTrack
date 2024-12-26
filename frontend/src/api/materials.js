@@ -10,7 +10,7 @@ export const fetchMaterials = async (courseId, token) => {
 };
 
 export const addMaterial = async (materialData, token) => {
-    const response = await Axios.post(API_URL, materialData,
+    const response = await Axios.post(`${API_URL}/`, materialData,
         { headers: { Authorization: `Bearer ${token}` } });
     return response.data;
 };

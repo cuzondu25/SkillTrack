@@ -45,6 +45,10 @@ CREATE TABLE IF NOT EXISTS quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
     question TEXT NOT NULL,
+    option_A TEXT,
+    option_B TEXT,
+    option_C TEXT,
+    option_D TEXT,
     correct_answer TEXT NOT NULL,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );

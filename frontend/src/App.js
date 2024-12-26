@@ -2,15 +2,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useAuth } from './context/AuthContext'; // Auth context
+import Quiz from './components/Quiz';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Register from './components/Register';
 import CourseList from './components/CourseList';
+import LandingPage from './components/LandingPage';
 import CourseProgress from './components/CourseProgress';
 import EnrolledCourses from './components/EnrolledCourses';
 import CourseMaterials from './components/CourseMaterials';
 import CompletedCourses from './components/CompletedCourses';
-import Quiz from './components/Quiz';
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
 
                         <Routes>
                             {/* Public Routes */}
+                            <Route path="/" element={<LandingPage />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
 

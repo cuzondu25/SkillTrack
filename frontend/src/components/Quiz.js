@@ -7,10 +7,12 @@ const Quiz = () => {
     const { courseId } = useParams();
     const navigate = useNavigate();
     const [quiz, setQuiz] = useState([]);
-    const [selectedAnswer, setSelectedAnswer] = useState('');
+    const [selectedAnswers, setSelectedAnswers] = useState({});
     const [message, setMessage] = useState('');
+    const [submissionError, setSubmissionError] = useState(false);
     const token = localStorage.getItem('token');
 
+    // Fetch quiz data
     useEffect(() => {
         const fetchQuizData = async () => {
             const data = await fetchQuiz(courseId, token);
@@ -19,9 +21,31 @@ const Quiz = () => {
         fetchQuizData();
     }, [courseId, token]);
 
-    const handleSubmit = async (quizId) => {
-        const response = await submitQuiz(quizId, courseId, selectedAnswer, token);
-        setMessage(response.is_correct ? 'Correct!' : 'Incorrect.');
+    // Handle checkbox selection for each option
+    const handleOptionChange = (quizId, optionText) => {
+        setSelectedAnswers({ ...selectedAnswers, [quizId]: optionText });
+    };
+
+    // Validate that only one option is selected for each question
+    const validateAnswers = () => {
+        return quiz.every((q) => selectedAnswers[q.id]);
+    };
+
+    // Handle form submission
+    const handleSubmit = async () => {
+        if (!validateAnswers()) {
+            setSubmissionError(true);
+            setMessage('Please select one answer for each question before submitting.');
+            return;
+        }
+
+        try {
+            const response = await submitQuiz(courseId, selectedAnswers, token);
+            setMessage(response.message);
+
+        } catch (error) {
+            setMessage('Error submitting the quiz. Please try again.');
+        }
     };
 
     const handleCompleteCourse = async () => {
@@ -35,16 +59,30 @@ const Quiz = () => {
             <h2>Quiz</h2>
             {quiz.map((q) => (
                 <div key={q.id}>
-                    <p>{q.question}</p>
-                    <input
-                        type="text"
-                        placeholder="Your Answer"
-                        value={selectedAnswer}
-                        onChange={(e) => setSelectedAnswer(e.target.value)}
-                    />
-                    <button onClick={() => handleSubmit(q.id)}>Submit Answer</button>
+                    <p dangerouslySetInnerHTML={{ __html: q.question }}></p>
+                    {['A', 'B', 'C', 'D'].map((option) => {
+                        const optionText = q[`option_${option}`];
+                        if (optionText) {
+                            return (
+                                <div key={option}>
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            name={`question-${q.id}`}
+                                            checked={selectedAnswers[q.id] === optionText}
+                                            onChange={() => handleOptionChange(q.id, optionText)}
+                                        />
+                                        {optionText}
+                                    </label>
+                                </div>
+                            );
+                        }
+                        return null;
+                    })}
                 </div>
             ))}
+            {submissionError && <p style={{ color: 'red' }}>{message}</p>}
+            <button onClick={handleSubmit}>Submit Quiz</button>
             {message && <p>{message}</p>}
 
             {/* Course Completed Button */}

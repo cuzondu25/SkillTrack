@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMaterials, addMaterial, deleteMaterial } from '../api/materials';
+import { Box, Typography, Grid, TextField, Button, Select, MenuItem, Card, CardContent, CardActions } from '@mui/material';
 
 const CourseMaterials = () => {
     const { courseId } = useParams();
@@ -30,45 +31,63 @@ const CourseMaterials = () => {
     };
 
     return (
-        <div>
-            <h2>Course Materials</h2>
-            <ul>
+        <Box p={3}>
+            <Typography variant="h4" gutterBottom>Course Materials</Typography>
+            <Grid container spacing={2}>
                 {materials.map((material) => (
-                    <li key={material.id}>
-                        <p>
-                            <strong>{material.title}</strong> ({material.material_type}) -{' '}
-                            <a href={material.material_url} target="_blank" rel="noopener noreferrer">
-                                Open Material
-                            </a>
-                        </p>
-                        <button onClick={() => handleDelete(material.id)}>Delete</button>
-                    </li>
+                    <Grid item xs={12} md={6} key={material.id}>
+                        <Card>
+                            <CardContent>
+                                <Typography variant="h6">{material.title}</Typography>
+                                <Typography variant="body2">
+                                    Type: {material.material_type} -{' '}
+                                    <a href={material.material_url} target="_blank" rel="noopener noreferrer">
+                                        Open Material
+                                    </a>
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button color="error" onClick={() => handleDelete(material.id)}>Delete</Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
                 ))}
-            </ul>
+            </Grid>
 
-            <h3>Add New Material</h3>
-            <input
-                type="text"
-                placeholder="Title"
-                value={newMaterial.title}
-                onChange={(e) => setNewMaterial({ ...newMaterial, title: e.target.value })}
-            />
-            <select
-                value={newMaterial.material_type}
-                onChange={(e) => setNewMaterial({ ...newMaterial, material_type: e.target.value })}
-            >
-                <option value="pdf">PDF</option>
-                <option value="video">Video</option>
-                <option value="link">Link</option>
-            </select>
-            <input
-                type="text"
-                placeholder="URL"
-                value={newMaterial.material_url}
-                onChange={(e) => setNewMaterial({ ...newMaterial, material_url: e.target.value })}
-            />
-            <button onClick={handleAddMaterial}>Add Material</button>
-        </div>
+            <Box mt={4}>
+                <Typography variant="h5">Add New Material</Typography>
+                <TextField
+                    fullWidth
+                    label="Title"
+                    size="small"
+                    value={newMaterial.title}
+                    onChange={(e) => setNewMaterial({ ...newMaterial, title: e.target.value })}
+                    margin="normal"
+                />
+                <Select
+                    fullWidth
+                    size="small"
+                    value={newMaterial.material_type}
+                    onChange={(e) => setNewMaterial({ ...newMaterial, material_type: e.target.value })}
+                    margin="normal"
+                >
+                    <MenuItem value="pdf">PDF</MenuItem>
+                    <MenuItem value="video">Video</MenuItem>
+                    <MenuItem value="link">Link</MenuItem>
+                </Select>
+                <TextField
+                    fullWidth
+                    label="URL"
+                    size="small"
+                    value={newMaterial.material_url}
+                    onChange={(e) => setNewMaterial({ ...newMaterial, material_url: e.target.value })}
+                    margin="normal"
+                />
+                <Button variant="contained" color="primary" onClick={handleAddMaterial}>
+                    Add Material
+                </Button>
+            </Box>
+        </Box>
     );
 };
 

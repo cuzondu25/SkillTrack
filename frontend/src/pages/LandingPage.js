@@ -25,18 +25,11 @@ const LandingPage = () => {
                     Your lightweight learning management platform
                 </Typography>
                 {user && (
-                    <>
-                        <Link to="/courses" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
-                                Courses
-                            </Button>
-                        </Link>
-                        <Link to="/courses/enrolled" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
-                               My Courses
-                            </Button>
-                        </Link>
-                    </>
+                    <Link to="/courses" style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            Courses
+                        </Button>
+                    </Link>
                 )}
                 {!user && (
                     <>

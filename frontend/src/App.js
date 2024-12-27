@@ -1,7 +1,7 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useAuth } from './context/AuthContext'; // Auth context
+import { useAuth } from './context/AuthContext';
 import Quiz from './components/Quiz';
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -12,7 +12,7 @@ import CourseProgress from './components/CourseProgress';
 import EnrolledCourses from './components/EnrolledCourses';
 import CourseMaterials from './components/CourseMaterials';
 import CompletedCourses from './components/CompletedCourses';
-import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
     const { user } = useAuth(); // Get user state from Auth Context

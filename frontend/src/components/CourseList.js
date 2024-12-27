@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCourses, enrollInCourse } from '../api/course';
+import { Typography, Button, Container, Grid, Card, CardContent } from '@mui/material';
 
 const CourseList = () => {
     const [courses, setCourses] = useState([]);
@@ -28,20 +29,31 @@ const CourseList = () => {
     };
 
     return (
-        <div>
-            <h2>Available Courses</h2>
-            {message && <p>{message}</p>}
-            <ul>
+        <Container maxWidth="md" sx={{ mt: 4 }}>
+            <Typography variant="h4" gutterBottom>Available Courses</Typography>
+            {message && <Typography color="error" gutterBottom>{message}</Typography>}
+            <Grid container spacing={3}>
                 {courses.map((course) => (
-                    <li key={course.id}>
-                        <h3>{course.title}</h3>
-                        <p>{course.description}</p>
-                        <p>Instructor: {course.instructor}</p>
-                        <button onClick={() => handleEnroll(course.id)}>Enroll</button>
-                    </li>
+                    <Grid item xs={12} sm={6} md={4} key={course.id}>
+                        <Card>
+                            <CardContent>
+                                <Typography variant="h6">{course.title}</Typography>
+                                <Typography variant="body2" color="text.secondary">{course.description}</Typography>
+                                <Typography variant="body2">Instructor: {course.instructor}</Typography>
+                                <Button 
+                                    variant="contained"
+                                    size="medium"
+                                    color="primary" onClick={() => handleEnroll(course.id)}
+                                    sx={{ mt: 2 }}
+                                >
+                                    Enroll
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 ))}
-            </ul>
-        </div>
+            </Grid>
+        </Container>
     );
 };
 

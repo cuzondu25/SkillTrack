@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCompletedCourses } from '../api/progress';
+import { Box, Typography, Grid, Card, CardContent } from '@mui/material';
 
 const CompletedCourses = () => {
     const [completedCourses, setCompletedCourses] = useState([]);
@@ -10,25 +11,29 @@ const CompletedCourses = () => {
             const data = await fetchCompletedCourses(token);
             setCompletedCourses(data);
         };
-
         loadCompletedCourses();
     }, [token]);
 
     return (
-        <div>
-            <h2>Completed Courses</h2>
+        <Box p={3}>
+            <Typography variant="h4" gutterBottom>Completed Courses</Typography>
             {completedCourses.length === 0 ? (
-                <p>No courses completed yet.</p>
+                <Typography>No courses completed yet.</Typography>
             ) : (
-                <ul>
+                <Grid container spacing={2}>
                     {completedCourses.map((course, index) => (
-                        <li key={index}>
-                            <strong>{course.course_title}</strong> - Quiz Score: {course.quiz_score}%
-                        </li>
+                        <Grid item xs={12} md={6} key={index}>
+                            <Card>
+                                <CardContent>
+                                    <Typography variant="h6">{course.course_title}</Typography>
+                                    <Typography>Quiz Score: {course.quiz_score}%</Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     ))}
-                </ul>
+                </Grid>
             )}
-        </div>
+        </Box>
     );
 };
 

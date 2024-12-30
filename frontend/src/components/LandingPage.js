@@ -116,19 +116,6 @@ const LandingPage = () => {
                     </Grid>
                 </Grid>
             </Box>
-
-            {/* Footer */}
-            <Box sx={{ textAlign: 'center', padding: 2, marginTop: 3, borderTop: '1px solid #ddd' }}>
-                <Typography variant="body2">© 2024 SkillTrack. All rights reserved.</Typography>
-                <Box sx={{ marginTop: 1 }}>
-                    <Link to="/" style={{ margin: '0 10px', textDecoration: 'none', color: '#2575fc' }}>
-                        Login
-                    </Link>
-                    <Link to="/register" style={{ margin: '0 10px', textDecoration: 'none', color: '#2575fc' }}>
-                        Register
-                    </Link>
-                </Box>
-            </Box>
         </Box>
     );
 };

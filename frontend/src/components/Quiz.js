@@ -1,3 +1,4 @@
+import Header from './Header';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchQuiz, submitQuiz } from '../api/quiz';
@@ -50,48 +51,51 @@ const Quiz = () => {
     };
 
     return (
-        <Box p={3}>
-            <Typography variant="h4">Quiz</Typography>
-            <Grid container spacing={2}>
-                {quiz.map((q) => (
-                    <Grid item xs={12} key={q.id}>
-                        <Card>
-                            <CardContent>
-                                <Typography dangerouslySetInnerHTML={{ __html: q.question }}></Typography>
-                                {['A', 'B', 'C', 'D'].map((option) => {
-                                    const optionText = q[`option_${option}`];
-                                    if (optionText) {
-                                        return (
-                                            <FormControlLabel
-                                                key={option}
-                                                control={
-                                                    <Checkbox
-                                                        checked={selectedAnswers[q.id] === optionText}
-                                                        onChange={() => handleOptionChange(q.id, optionText)}
-                                                    />
-                                                }
-                                                label={optionText}
-                                            />
-                                        );
-                                    }
-                                    return null;
-                                })}
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
-            {submissionError && <Typography color="error">{subErrmsg}</Typography>}
-            <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 2 }}>
-                Submit Quiz
-            </Button>
-            {message && <Typography mt={2}>{message}</Typography>}
-            {message && (
-                <Button variant="contained" color="success" onClick={handleCompleteCourse} sx={{ mt: 2 }}>
-                    Mark as Completed
+        <>
+            <Header />
+            <Box p={3}>
+                <Typography variant="h4">Quiz</Typography>
+                <Grid container spacing={2}>
+                    {quiz.map((q) => (
+                        <Grid item xs={12} key={q.id}>
+                            <Card>
+                                <CardContent>
+                                    <Typography dangerouslySetInnerHTML={{ __html: q.question }}></Typography>
+                                    {['A', 'B', 'C', 'D'].map((option) => {
+                                        const optionText = q[`option_${option}`];
+                                        if (optionText) {
+                                            return (
+                                                <FormControlLabel
+                                                    key={option}
+                                                    control={
+                                                        <Checkbox
+                                                            checked={selectedAnswers[q.id] === optionText}
+                                                            onChange={() => handleOptionChange(q.id, optionText)}
+                                                        />
+                                                    }
+                                                    label={optionText}
+                                                />
+                                            );
+                                        }
+                                        return null;
+                                    })}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    ))}
+                </Grid>
+                {submissionError && <Typography color="error">{subErrmsg}</Typography>}
+                <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 2 }}>
+                    Submit Quiz
                 </Button>
-            )}
-        </Box>
+                {message && <Typography mt={2}>{message}</Typography>}
+                {message && (
+                    <Button variant="contained" color="success" onClick={handleCompleteCourse} sx={{ mt: 2 }}>
+                        Mark as Completed
+                    </Button>
+                )}
+            </Box>
+        </>
     );
 };
 

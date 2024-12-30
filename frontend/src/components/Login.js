@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import Header from './Header';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
 import { login as apiLogin } from '../api/auth';
+import { AuthContext } from '../context/AuthContext';
+import React, { useState, useContext } from 'react';
 import { Box, TextField, Button, Typography, Container } from '@mui/material';
 
 const Login = () => {
@@ -24,32 +25,35 @@ const Login = () => {
     };
 
     return (
-        <Container maxWidth="xs">
-            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 8, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <Typography variant="h4" component="h1" gutterBottom>Login</Typography>
-                <TextField
-                    label="Username"
-                    variant="outlined"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    fullWidth
-                    required
-                />
-                <Button type="submit" variant="contained" color="primary" fullWidth>
-                    Login
-                </Button>
-                {message && <Typography color="error">{message}</Typography>}
-            </Box>
-        </Container>
+        <>
+            <Header />
+            <Container maxWidth="xs">
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 8, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <Typography variant="h4" component="h1" gutterBottom>Login</Typography>
+                    <TextField
+                        label="Username"
+                        variant="outlined"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        fullWidth
+                        required
+                    />
+                    <TextField
+                        label="Password"
+                        type="password"
+                        variant="outlined"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        fullWidth
+                        required
+                    />
+                    <Button type="submit" variant="contained" color="primary" fullWidth>
+                        Login
+                    </Button>
+                    {message && <Typography color="error">{message}</Typography>}
+                </Box>
+            </Container>
+        </>
     );
 };
 

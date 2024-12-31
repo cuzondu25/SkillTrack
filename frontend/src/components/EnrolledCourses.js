@@ -30,7 +30,7 @@ const EnrolledCourses = () => {
                                 <CardContent>
                                     <Typography variant="h6">{course.title}</Typography>
                                     <Typography variant="body2" color="text.secondary">{course.description}</Typography>
-                                    <Typography variant="body2">Instructor: {course.instructor}</Typography>
+                                    <Typography variant="body2" sx={{ mt: 2 }}>Instructor: {course.instructor}</Typography>
                                     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
                                         <Button
                                             variant="contained"

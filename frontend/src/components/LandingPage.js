@@ -27,13 +27,18 @@ const LandingPage = () => {
                 {user && (
                     <>
                         <Link to="/courses" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
                                 Courses
                             </Button>
                         </Link>
                         <Link to="/courses/enrolled" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
-                               My Courses
+                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                               Enrolled
+                            </Button>
+                        </Link>
+                        <Link to="/courses/completed" style={{ textDecoration: 'none' }}>
+                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                               Completed
                             </Button>
                         </Link>
                     </>
@@ -41,12 +46,12 @@ const LandingPage = () => {
                 {!user && (
                     <>
                         <Link to="/register" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
                                 Get Started
                             </Button>
                         </Link>
                         <Link to="/login" style={{ textDecoration: 'none' }}>
-                            <Button variant="outlined" size="large" sx={{ marginRight: 2, color: '#ffffff', borderColor: '#ffffff' }}>
+                            <Button variant="outlined" size="medium" sx={{ marginRight: 2, color: '#ffffff', borderColor: '#ffffff' }}>
                                 Login
                             </Button>
                         </Link>
@@ -54,7 +59,7 @@ const LandingPage = () => {
                 )}
                 {user && (
                     <Link to="/logout" style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" size="large" sx={{ color: '#ffffff', borderColor: '#ffffff' }}>
+                        <Button variant="outlined" size="medium" sx={{ color: '#ffffff', borderColor: '#ffffff' }}>
                             Logout
                         </Button>
                     </Link>

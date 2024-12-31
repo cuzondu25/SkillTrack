@@ -27,6 +27,38 @@ const Header = () => {
                     >
                         Home
                     </Button>
+                    <Button
+                        component={Link}
+                        to="/courses"
+                        color="inherit"
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                        Courses
+                    </Button>
+                    <Button
+                        component={Link}
+                        to="/courses/enrolled"
+                        color="inherit"
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                        Enrolled
+                    </Button>
+                    <Button
+                        component={Link}
+                        to="/courses/completed"
+                        color="inherit"
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                        Completed
+                    </Button>
+                    <Button
+                        component={Link}
+                        to="/logout"
+                        color="inherit"
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                        Logout
+                    </Button>
                 </Box>
             </Toolbar>
         </AppBar>

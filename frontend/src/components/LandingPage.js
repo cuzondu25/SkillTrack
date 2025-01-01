@@ -27,17 +27,53 @@ const LandingPage = () => {
                 {user && (
                     <>
                         <Link to="/courses" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
                                 Courses
                             </Button>
                         </Link>
                         <Link to="/courses/enrolled" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
                                Enrolled
                             </Button>
                         </Link>
                         <Link to="/courses/completed" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
                                Completed
                             </Button>
                         </Link>
@@ -46,12 +82,37 @@ const LandingPage = () => {
                 {!user && (
                     <>
                         <Link to="/register" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="medium" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
                                 Get Started
                             </Button>
                         </Link>
                         <Link to="/login" style={{ textDecoration: 'none' }}>
-                            <Button variant="outlined" size="medium" sx={{ marginRight: 2, color: '#ffffff', borderColor: '#ffffff' }}>
+                            <Button
+                                variant="outlined"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    color: '#ffffff',
+                                    borderColor: '#ffffff',
+                                    '&:hover': {
+                                        backgroundColor: '#ffffff', // Adds background on hover
+                                        color: '#2575fc',           // Changes text color on hover
+                                        borderColor: '#2575fc',     // Changes border color on hover
+                                    },
+                                }}
+                            >
                                 Login
                             </Button>
                         </Link>
@@ -59,7 +120,20 @@ const LandingPage = () => {
                 )}
                 {user && (
                     <Link to="/logout" style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" size="medium" sx={{ color: '#ffffff', borderColor: '#ffffff' }}>
+                        <Button
+                            variant="outlined"
+                            size="medium"
+                            sx={{
+                                marginRight: 2,
+                                color: '#ffffff',
+                                borderColor: '#ffffff',
+                                '&:hover': {
+                                    backgroundColor: '#ffffff', // Adds background on hover
+                                    color: '#2575fc',           // Changes text color on hover
+                                    borderColor: '#2575fc',     // Changes border color on hover
+                                },
+                            }}
+                        >
                             Logout
                         </Button>
                     </Link>

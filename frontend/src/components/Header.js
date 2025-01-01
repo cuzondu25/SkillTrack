@@ -53,6 +53,14 @@ const Header = () => {
                     </Button>
                     <Button
                         component={Link}
+                        to="/about"
+                        color="inherit"
+                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                    >
+                        About
+                    </Button>
+                    <Button
+                        component={Link}
                         to="/logout"
                         color="inherit"
                         sx={{ textTransform: 'none', fontWeight: 'bold' }}

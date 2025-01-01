@@ -47,7 +47,7 @@ const Quiz = () => {
     const handleCompleteCourse = async () => {
         await updateProgress({ course_id: courseId, is_completed: true }, token);
         alert('Course marked as completed!');
-        navigate('/');
+        navigate('/courses/completed');
     };
 
     return (

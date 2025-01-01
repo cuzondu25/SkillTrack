@@ -12,7 +12,9 @@ import EnrolledCourses from './components/EnrolledCourses';
 import CourseMaterials from './components/CourseMaterials';
 import CompletedCourses from './components/CompletedCourses';
 import ProtectedRoute from './components/ProtectedRoute';
+import ContactUs from './components/ContactUs';
 import Layout from './components/Layout';
+import About from './components/About';
 
 function App() {
     const { user } = useAuth(); // Get user state from Auth Context
@@ -31,6 +33,8 @@ function App() {
                             <Route path="/" element={<LandingPage />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/contact" element={<ContactUs />} />
 
                             {/* Protected Routes */}
                             <Route

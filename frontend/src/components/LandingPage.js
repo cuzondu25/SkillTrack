@@ -114,7 +114,7 @@ const LandingPage = () => {
                                     "SkillTrack transformed the way I learn online! The progress tracking is amazing."
                                 </Typography>
                                 <Typography variant="caption" display="block" textAlign="right">
-                                    - Jane Doe
+                                    - Ebube Godwin
                                 </Typography>
                             </CardContent>
                         </Card>

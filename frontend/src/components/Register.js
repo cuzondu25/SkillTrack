@@ -30,6 +30,7 @@ const Register = () => {
                     <TextField
                         label="Username"
                         variant="outlined"
+                        size="small"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         fullWidth
@@ -39,6 +40,7 @@ const Register = () => {
                         label="Password"
                         type="password"
                         variant="outlined"
+                        size="small"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         fullWidth

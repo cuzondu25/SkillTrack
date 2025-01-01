@@ -1,7 +1,6 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useAuth } from './context/AuthContext'; // Auth context
+import { useAuth } from './context/AuthContext';
 import Quiz from './components/Quiz';
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -12,18 +11,19 @@ import CourseProgress from './components/CourseProgress';
 import EnrolledCourses from './components/EnrolledCourses';
 import CourseMaterials from './components/CourseMaterials';
 import CompletedCourses from './components/CompletedCourses';
-import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import ProtectedRoute from './components/ProtectedRoute';
+import ContactUs from './components/ContactUs';
+import Layout from './components/Layout';
+import About from './components/About';
 
 function App() {
     const { user } = useAuth(); // Get user state from Auth Context
 
     return (
         <div className='App'>
-            <header>
-                <h1>SkillTrack</h1>
-            </header>
             <main>
                 <Router>
+                    <Layout>
                     <div>
                         {/* Only render CourseProgress if the user is logged in */}
                         {user && <CourseProgress />}
@@ -33,6 +33,8 @@ function App() {
                             <Route path="/" element={<LandingPage />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/register" element={<Register />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/contact" element={<ContactUs />} />
 
                             {/* Protected Routes */}
                             <Route
@@ -85,6 +87,7 @@ function App() {
                             />
                         </Routes>
                     </div>
+                    </Layout>
                 </Router>
             </main>
         </div>

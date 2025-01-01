@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { register } from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await register(username, password);
-            setMessage('Registration successful! You can now log in.');
+            setMessage(response.message);
+            navigate('/login');
         } catch (err) {
-            setMessage('Registration failed. Try again.');
+            setMessage('Registration failed. Try again!.');
         }
     };
 

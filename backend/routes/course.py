@@ -26,7 +26,7 @@ def enroll_course():
     # Check if the user is already enrolled
     cursor.execute("SELECT * FROM enrollments WHERE user_id = %s AND course_id = %s", (user_id, course_id))
     if cursor.fetchone():
-        return jsonify({"message": "You are already enrolled in this course"}), 400
+        return jsonify({"message": "You are already enrolled in this course"}), 200
 
     # Enroll the user
     cursor.execute("INSERT INTO enrollments (user_id, course_id) VALUES (%s, %s)", (user_id, course_id))

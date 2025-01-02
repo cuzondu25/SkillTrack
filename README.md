@@ -1,6 +1,13 @@
 # SkillTrack
 
-SkillTrack is a lightweight learning management platform designed to make online education accessible and intuitive. It provides features for browsing courses, enrolling in them, tracking progress, and taking quizzes, all through a responsive and user-friendly interface.
+SkillTrack is a lightweight learning management platform designed to make online education accessible and intuitive. It provides features for browsing courses, enrolling in them, accessing course materials, taking quizzes and tracking progress all through a responsive and user-friendly interface.
+
+### Deployed Site: [SkillTrack Live](https://s-record-three.vercel.app/)
+
+### Final Project Blog Article: [SkillTrack Project Blog](https://www.linkedin.com/pulse/automating-small-business-sales-tracking-srecord-project-uzondu-ebube-avtcf)
+
+### Authors LinkedIn:
+* [Uzondu Chidiebube](https://www.linkedin.com/in/uzondu-ebube-739472108)
 
 ## Features
 
@@ -31,6 +38,7 @@ SkillTrack is a lightweight learning management platform designed to make online
 
 ### Prerequisites
 - Node.js
+- npm
 - Python (3.9 or above)
 - MySQL
 
@@ -38,7 +46,7 @@ SkillTrack is a lightweight learning management platform designed to make online
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/SkillTrack.git
+   git clone https://github.com/cuzondu25/SkillTrack.git
    cd SkillTrack/backend
    ```
 
@@ -54,16 +62,15 @@ SkillTrack is a lightweight learning management platform designed to make online
    ```
 
 4. Set up the database:
-   - Create a MySQL database named `skilltrack`.
-   - Update the database connection in `config.py`.
-   - Run migrations:
+   - Create a MySQL database and tables:
      ```bash
-     flask db upgrade
+     cat create_tables.sql | mysql -u your_username -p
      ```
+   - Update the database connection in `./services/dp.py`.
 
-5. Start the server:
+5. Start the backend server:
    ```bash
-   flask run
+   python3 app.py  # flask app
    ```
 
 ### Frontend Setup
@@ -75,7 +82,7 @@ SkillTrack is a lightweight learning management platform designed to make online
 
 2. Install dependencies:
    ```bash
-   npm install
+   npm install @mui/material @emotion/react @emotion/styled
    ```
 
 3. Start the development server:
@@ -88,10 +95,18 @@ SkillTrack is a lightweight learning management platform designed to make online
 ## Usage
 
 1. Register as a new user or log in with your existing account.
-2. Browse the available courses and enroll in the ones you like.
-3. Access course materials and track your learning progress.
-4. Take quizzes to reinforce your knowledge.
-5. Admin users can manage courses and quizzes via the admin interface.
+   ![skilltrack_3](https://github.com/user-attachments/assets/e7b6570a-8fed-4626-adc5-b3c968728395)
+
+3. Browse the available courses and enroll in the ones you like.
+   ![skilltrack_8](https://github.com/user-attachments/assets/c23dd6d3-f03f-4ffa-81f3-6e9fec920141)
+
+5. Access course materials and track your learning progress.
+   ![skilltrack_6](https://github.com/user-attachments/assets/e9a53f4d-734b-4075-bfb6-c13a3f299228)
+
+7. Take quizzes to reinforce your knowledge.
+   ![skilltrack_4](https://github.com/user-attachments/assets/eccc584d-c077-4446-92ca-2346479dbb60)
+
+9. Admin users can manage courses and quizzes via the admin interface.
 
 ## Project Structure
 
@@ -101,7 +116,6 @@ SkillTrack is a lightweight learning management platform designed to make online
 - **/context**: Context API for managing global application state.
 
 ### Backend
-- **/models**: Database models for users, courses, and progress.
 - **/routes**: API routes for authentication, courses, and quizzes.
 - **/services**: Business logic for handling user requests.
 
@@ -112,5 +126,5 @@ SkillTrack is a lightweight learning management platform designed to make online
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for more details.
 

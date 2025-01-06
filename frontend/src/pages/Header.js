@@ -29,28 +29,16 @@ const Header = () => {
                     >
                         Home
                     </Button>
-                    <Button
-                        component={Link}
-                        to="/courses"
-                        color="inherit"
-                        sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                    >
-                        Courses
-                    </Button>
-
-                    {user && user.role === 'admin' && (
-                        <Button
-                            component={Link}
-                            to="/admin/courses"
-                            color="inherit"
-                            sx={{ textTransform: 'none', fontWeight: 'bold' }}
-                        >
-                            Manage Courses
-                        </Button>
-                    )}
-
-                    {user && user.role === 'user' && (
+                    {user && (
                         <>
+                            <Button
+                                component={Link}
+                                to="/courses"
+                                color="inherit"
+                                sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                            >
+                                Courses
+                            </Button>
                             <Button
                                 component={Link}
                                 to="/courses/enrolled"

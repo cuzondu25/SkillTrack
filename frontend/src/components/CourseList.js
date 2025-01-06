@@ -1,11 +1,13 @@
+import Header from './Header';
+import { useAuth } from '../context/AuthContext';
 import React, { useEffect, useState } from 'react';
 import { fetchCourses, enrollInCourse } from '../api/course';
 import { Typography, Button, Container, Grid, Card, CardContent } from '@mui/material';
-import Header from './Header';
 
 const CourseList = () => {
     const [courses, setCourses] = useState([]);
     const [message, setMessage] = useState('');
+    const { user } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,15 +44,17 @@ const CourseList = () => {
                                 <CardContent>
                                     <Typography variant="h6">{course.title}</Typography>
                                     <Typography variant="body2" color="text.secondary">{course.description}</Typography>
-                                    <Typography variant="body2">Instructor: {course.instructor}</Typography>
-                                    <Button 
-                                        variant="contained"
-                                        size="medium"
-                                        color="primary" onClick={() => handleEnroll(course.id)}
-                                        sx={{ mt: 2 }}
-                                    >
-                                        Enroll
-                                    </Button>
+                                    <Typography variant="body2" sx={{ mt: 2 }}>Instructor: {course.instructor}</Typography>
+                                    {user && user.role === 'user' && (
+                                        <Button 
+                                            variant="contained"
+                                            size="medium"
+                                            color="primary" onClick={() => handleEnroll(course.id)}
+                                            sx={{ mt: 2 }}
+                                        >
+                                            Enroll
+                                        </Button>
+                                    )}
                                 </CardContent>
                             </Card>
                         </Grid>

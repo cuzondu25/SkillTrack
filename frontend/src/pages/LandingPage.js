@@ -25,21 +25,94 @@ const LandingPage = () => {
                     Your lightweight learning management platform
                 </Typography>
                 {user && (
-                    <Link to="/courses" style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
-                            Courses
-                        </Button>
-                    </Link>
+                    <>
+                        <Link to="/courses" style={{ textDecoration: 'none' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
+                                Courses
+                            </Button>
+                        </Link>
+                        <Link to="/courses/enrolled" style={{ textDecoration: 'none' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
+                               Enrolled
+                            </Button>
+                        </Link>
+                        <Link to="/courses/completed" style={{ textDecoration: 'none' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
+                               Completed
+                            </Button>
+                        </Link>
+                    </>
                 )}
                 {!user && (
                     <>
                         <Link to="/register" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" size="large" sx={{ marginRight: 2, backgroundColor: '#ffffff', color: '#2575fc' }}>
+                            <Button
+                                variant="contained"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    backgroundColor: '#ffffff',
+                                    color: '#2575fc',
+                                    '&:hover': {
+                                        backgroundColor: '#2575fc',
+                                        color: '#ffffff',
+                                    },
+                                }}
+                            >
                                 Get Started
                             </Button>
                         </Link>
                         <Link to="/login" style={{ textDecoration: 'none' }}>
-                            <Button variant="outlined" size="large" sx={{ marginRight: 2, color: '#ffffff', borderColor: '#ffffff' }}>
+                            <Button
+                                variant="outlined"
+                                size="medium"
+                                sx={{
+                                    marginRight: 2,
+                                    color: '#ffffff',
+                                    borderColor: '#ffffff',
+                                    '&:hover': {
+                                        backgroundColor: '#ffffff', // Adds background on hover
+                                        color: '#2575fc',           // Changes text color on hover
+                                        borderColor: '#2575fc',     // Changes border color on hover
+                                    },
+                                }}
+                            >
                                 Login
                             </Button>
                         </Link>
@@ -47,7 +120,20 @@ const LandingPage = () => {
                 )}
                 {user && (
                     <Link to="/logout" style={{ textDecoration: 'none' }}>
-                        <Button variant="outlined" size="large" sx={{ color: '#ffffff', borderColor: '#ffffff' }}>
+                        <Button
+                            variant="outlined"
+                            size="medium"
+                            sx={{
+                                marginRight: 2,
+                                color: '#ffffff',
+                                borderColor: '#ffffff',
+                                '&:hover': {
+                                    backgroundColor: '#ffffff', // Adds background on hover
+                                    color: '#2575fc',           // Changes text color on hover
+                                    borderColor: '#2575fc',     // Changes border color on hover
+                                },
+                            }}
+                        >
                             Logout
                         </Button>
                     </Link>
@@ -102,25 +188,12 @@ const LandingPage = () => {
                                     "SkillTrack transformed the way I learn online! The progress tracking is amazing."
                                 </Typography>
                                 <Typography variant="caption" display="block" textAlign="right">
-                                    - Jane Doe
+                                    - Ebube Godwin
                                 </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
                 </Grid>
-            </Box>
-
-            {/* Footer */}
-            <Box sx={{ textAlign: 'center', padding: 2, marginTop: 3, borderTop: '1px solid #ddd' }}>
-                <Typography variant="body2">© 2024 SkillTrack. All rights reserved.</Typography>
-                <Box sx={{ marginTop: 1 }}>
-                    <Link to="/" style={{ margin: '0 10px', textDecoration: 'none', color: '#2575fc' }}>
-                        Login
-                    </Link>
-                    <Link to="/register" style={{ margin: '0 10px', textDecoration: 'none', color: '#2575fc' }}>
-                        Register
-                    </Link>
-                </Box>
             </Box>
         </Box>
     );

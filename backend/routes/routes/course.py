@@ -18,7 +18,7 @@ def get_courses():
 def enroll_course():
     data = request.get_json()
     course_id = data.get('course_id')
-    user_id = get_jwt_identity()['id']
+    user_id = get_jwt_identity()
 
     connection = get_db_connection()
     cursor = connection.cursor()
@@ -37,7 +37,7 @@ def enroll_course():
 @course_bp.route('/courses/enrolled', methods=['GET'])
 @jwt_required()
 def get_enrolled_courses():
-    user_id = get_jwt_identity()['id']
+    user_id = get_jwt_identity()
 
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)

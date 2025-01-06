@@ -11,7 +11,10 @@ import CourseProgress from './components/CourseProgress';
 import EnrolledCourses from './components/EnrolledCourses';
 import CourseMaterials from './components/CourseMaterials';
 import CompletedCourses from './components/CompletedCourses';
+import AdminCourseManager from './components/AdminCourseManager';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminQuizForm from './components/AdminQuizForm';
+import AdminRoute from './components/AdminRoute';
 import ContactUs from './components/ContactUs';
 import Layout from './components/Layout';
 import About from './components/About';
@@ -26,7 +29,7 @@ function App() {
                     <Layout>
                     <div>
                         {/* Only render CourseProgress if the user is logged in */}
-                        {user && <CourseProgress />}
+                        {user && user.role === 'user' && <CourseProgress />}
 
                         <Routes>
                             {/* Public Routes */}
@@ -35,16 +38,9 @@ function App() {
                             <Route path="/register" element={<Register />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/contact" element={<ContactUs />} />
+                            <Route path="/courses" element={<CourseList />} />
 
                             {/* Protected Routes */}
-                            <Route
-                                path="/courses"
-                                element={
-                                    <ProtectedRoute>
-                                        <CourseList />
-                                    </ProtectedRoute>
-                                }
-                            />
                             <Route
                                 path="/courses/enrolled"
                                 element={
@@ -75,6 +71,22 @@ function App() {
                                     <ProtectedRoute>
                                         <CompletedCourses />
                                     </ProtectedRoute>
+                                }
+                            />
+                             <Route
+                                path="/admin/courses"
+                                element={
+                                    <AdminRoute>
+                                        <AdminCourseManager />
+                                    </AdminRoute>
+                                }
+                            />
+                            <Route
+                                path="/admin/courses/:courseId/add-quiz"
+                                element={
+                                    <AdminRoute>
+                                        <AdminQuizForm />
+                                    </AdminRoute>
                                 }
                             />
                             <Route

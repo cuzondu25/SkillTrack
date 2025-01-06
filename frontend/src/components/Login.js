@@ -16,9 +16,9 @@ const Login = () => {
         e.preventDefault();
         try {
             const data = await apiLogin(username, password);
-            login(data.token);
+            login(data.token, data.role);
             setMessage('Login successful!');
-            navigate('/courses');
+            navigate('/');
         } catch (err) {
             setMessage('Login failed!');
         }

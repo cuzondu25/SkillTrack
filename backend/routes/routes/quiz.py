@@ -24,7 +24,7 @@ def get_quiz(course_id):
 @jwt_required()
 def submit_quiz():
     data = request.get_json()
-    user_id = get_jwt_identity()['id']
+    user_id = get_jwt_identity()
     course_id = data.get('course_id')
     selected_answers = data.get('selected_answers')
 

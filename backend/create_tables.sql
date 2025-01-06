@@ -25,9 +25,11 @@ CREATE TABLE IF NOT EXISTS users (
 -- Create the courses table
 CREATE TABLE IF NOT EXISTS courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    created_by INT NOT NULL,
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     instructor VARCHAR(100) NOT NULL
+    FOREIGN KEY (created_by) REFERENCES user(id) ON DELETE CASCADE
 );
 
 -- Create the enrollments table

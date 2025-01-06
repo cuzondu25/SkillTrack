@@ -16,7 +16,7 @@ const CourseProgress = () => {
     return (
         <div style={{
             position: 'fixed',
-            top: '10px',
+            bottom: '10px',
             right: '10px',
             padding: '10px',
             backgroundColor: '#007bff',

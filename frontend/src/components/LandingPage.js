@@ -24,25 +24,44 @@ const LandingPage = () => {
                 <Typography variant="h5" sx={{ marginBottom: 3 }}>
                     Your lightweight learning management platform
                 </Typography>
-                {user && (
+                <Link to="/courses" style={{ textDecoration: 'none' }}>
+                    <Button
+                        variant="contained"
+                        size="medium"
+                        sx={{
+                            marginRight: 2,
+                            backgroundColor: '#ffffff',
+                            color: '#2575fc',
+                            '&:hover': {
+                                backgroundColor: '#2575fc',
+                                color: '#ffffff',
+                            },
+                        }}
+                    >
+                        Courses
+                    </Button>
+                </Link>
+                {user && user.role === 'admin' && (
+                    <Link to="/admin/courses" style={{ textDecoration: 'none' }}>
+                        <Button
+                            variant="contained"
+                            size="medium"
+                            sx={{
+                                marginRight: 2,
+                                backgroundColor: '#ffffff',
+                                color: '#2575fc',
+                                '&:hover': {
+                                    backgroundColor: '#2575fc',
+                                    color: '#ffffff',
+                                },
+                            }}
+                        >
+                            Manage Courses
+                        </Button>
+                    </Link> 
+                )}
+                {user && user.role === 'user' && (
                     <>
-                        <Link to="/courses" style={{ textDecoration: 'none' }}>
-                            <Button
-                                variant="contained"
-                                size="medium"
-                                sx={{
-                                    marginRight: 2,
-                                    backgroundColor: '#ffffff',
-                                    color: '#2575fc',
-                                    '&:hover': {
-                                        backgroundColor: '#2575fc',
-                                        color: '#ffffff',
-                                    },
-                                }}
-                            >
-                                Courses
-                            </Button>
-                        </Link>
                         <Link to="/courses/enrolled" style={{ textDecoration: 'none' }}>
                             <Button
                                 variant="contained"

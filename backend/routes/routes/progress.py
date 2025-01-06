@@ -7,7 +7,7 @@ progress_bp = Blueprint('progress', __name__)
 @progress_bp.route('/', methods=['GET'])
 @jwt_required()
 def get_progress():
-    user_id = get_jwt_identity()['id']
+    user_id = get_jwt_identity()
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
@@ -42,7 +42,7 @@ def get_progress():
 @jwt_required()
 def update_progress():
     data = request.get_json()
-    user_id = get_jwt_identity()['id']
+    user_id = get_jwt_identity()
     course_id = data.get('course_id')
     is_completed = data.get('is_completed')
 
@@ -83,7 +83,7 @@ def update_progress():
 @progress_bp.route('/completed', methods=['GET'])
 @jwt_required()
 def get_completed_courses():
-    user_id = get_jwt_identity()['id']
+    user_id = get_jwt_identity()
 
     connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)

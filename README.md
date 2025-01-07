@@ -2,7 +2,7 @@
 
 SkillTrack is a lightweight learning management platform designed to make online education accessible and intuitive. It provides features for browsing courses, enrolling in them, accessing course materials, taking quizzes and tracking progress all through a responsive and user-friendly interface.
 
-### Deployed Site: [SkillTrack Live](https://s-record-three.vercel.app/)
+### Deployed Site: [SkillTrack Live](https://skill-track-five.vercel.app/)
 
 ### Final Project Blog Article: [SkillTrack Project Blog](https://www.linkedin.com/pulse/automating-small-business-sales-tracking-srecord-project-uzondu-ebube-avtcf)
 
@@ -107,6 +107,7 @@ SkillTrack is a lightweight learning management platform designed to make online
    ![skilltrack_4](https://github.com/user-attachments/assets/eccc584d-c077-4446-92ca-2346479dbb60)
 
 9. Admin users can manage courses and quizzes via the admin interface.
+   ![skilltrack_11](https://github.com/user-attachments/assets/8d72ba38-de30-4fc3-b021-c8f885403c09)
 
 ## Project Structure
 

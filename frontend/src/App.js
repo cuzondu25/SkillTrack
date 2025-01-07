@@ -40,7 +40,7 @@ function App() {
                             <Route path="/contact" element={<ContactUs />} />
                             <Route path="/courses" element={<CourseList />} />
 
-                            {/* Protected Routes */}
+                            {/* Protected User and  admin routes */}
                             <Route
                                 path="/courses/enrolled"
                                 element={

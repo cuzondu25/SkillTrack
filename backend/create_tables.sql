@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS courses (
     created_by INT NOT NULL,
     title VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    instructor VARCHAR(100) NOT NULL
+    instructor VARCHAR(100) NOT NULL,
     FOREIGN KEY (created_by) REFERENCES user(id) ON DELETE CASCADE
 );
 

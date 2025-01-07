@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/materials';
+const API_URL = 'https://cuzondu25.pythonanywhere.com/api/materials';
 
 export const fetchMaterials = async (courseId, token) => {
     const response = await Axios.get(`${API_URL}/${courseId}`, {

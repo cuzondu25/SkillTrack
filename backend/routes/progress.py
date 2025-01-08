@@ -66,12 +66,22 @@ def update_progress():
     total_correct_answers = cursor.fetchone()['total_correct_answers']
     score = (total_correct_answers / total_questions) * 100
 
-
+    # Check if the progress already exists
     cursor.execute("""
-        INSERT IGNORE INTO course_progress
-        (user_id, course_id, is_completed, quiz_score)
-        VALUES (%s, %s, %s, %s)
-     """, (user_id, course_id, is_completed, score))
+        SELECT COUNT(*) AS count FROM course_progress 
+        WHERE user_id = %s AND course_id = %s
+    """, (user_id, course_id))
+
+    # Fetch the result
+    result = cursor.fetchone()
+
+    # Insert only if the record does not exist
+    if result['count'] == 0:
+        cursor.execute("""
+            INSERT INTO course_progress
+            (user_id, course_id, is_completed, quiz_score)
+            VALUES (%s, %s, %s, %s)
+        """, (user_id, course_id, is_completed, score))
 
     connection.commit()
     connection.close()

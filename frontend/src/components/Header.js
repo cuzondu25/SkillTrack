@@ -87,6 +87,16 @@ const Header = () => {
                             Logout
                         </Button>
                     )}
+                    {!user && (
+                        <Button
+                            component={Link}
+                            to="/login"
+                            color="inherit"
+                            sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                        >
+                            Login
+                        </Button>
+                    )}
                 </Box>
             </Toolbar>
         </AppBar>

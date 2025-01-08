@@ -36,11 +36,23 @@ def submit_quiz():
         correct_answer = cursor.fetchone().get('correct_answer')
         is_correct = (selected_answer == correct_answer)
 
+        # Check if the record already exists
         cursor.execute("""
-            INSERT IGNORE INTO quiz_answers
-            (quiz_id, user_id, course_id, selected_answer, is_correct)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (quiz_id, user_id, course_id, selected_answer, is_correct))
+            SELECT COUNT(*) AS count FROM quiz_answers 
+            WHERE user_id = %s AND course_id = %s AND quiz_id = %s
+        """, (user_id, course_id, quiz_id))
+
+        # Fetch the result
+        result = cursor.fetchone()
+
+        # Insert only if the record does not exist
+        if result['count'] == 0:
+            cursor.execute("""
+                INSERT INTO quiz_answers
+                (quiz_id, user_id, course_id, selected_answer, is_correct)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (quiz_id, user_id, course_id, selected_answer, is_correct))
+
     
     connection.commit()
     connection.close()

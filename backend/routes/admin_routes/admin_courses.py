@@ -61,10 +61,16 @@ def delete_course(course_id):
     if not course:
         return jsonify({"message": "access denied"}), 404
 
-    # Delete course and related materials
-    cursor.execute("""
-    DELETE FROM course_materials WHERE course_id = %s
-    """,(course_id,))
+    # Delete course and any refrence to it on other tables
+    cursor.execute("DELETE FROM course_materials WHERE course_id = %s", (course_id,))
+
+    cursor.execute("DELETE FROM course_progress WHERE course_id = %s", (course_id,))
+
+    cursor.execute("DELETE FROM quiz_answers WHERE course_id = %s", (course_id,))
+    
+    cursor.execute("DELETE FROM quizzes WHERE course_id = %s", (course_id,))
+
+    cursor.execute("DELETE FROM enrollments WHERE course_id = %s", (course_id,))
 
     cursor.execute("DELETE FROM courses WHERE id = %s", (course_id,))
     connection.commit()

@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS quizzes (
 -- Create quiz_answers table
 CREATE TABLE IF NOT EXISTS quiz_answers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    quiz_id INT NOT NULL UNIQUE,
+    quiz_id INT NOT NULL,
     user_id INT NOT NULL,
     course_id INT NOT NULL,
     selected_answer TEXT NOT NULL,
@@ -76,8 +76,7 @@ CREATE TABLE IF NOT EXISTS course_progress (
     is_completed BOOLEAN DEFAULT FALSE,
     quiz_score INT DEFAULT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    UNIQUE (course_id)
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
 -- Table to store course study materials

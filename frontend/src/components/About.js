@@ -27,7 +27,7 @@ const About = () => {
         <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
           Hello, I'm <strong>Uzondu Chidiebube Godwin</strong>, a full stack software 
           engineering student at <strong>Alx Africa</strong>, the passionate mind behind
-          <strong> SkillTrack</strong>. My expertise lies in building
+          <strong>SkillTrack</strong>. My expertise lies in building
           user-centric web applications that solve real-world challenges. With
           a love for technology and education, I strive to create impactful
           solutions that bridge the gap between learning and innovation.

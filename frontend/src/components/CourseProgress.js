@@ -16,12 +16,13 @@ const CourseProgress = () => {
     return (
         <div style={{
             position: 'fixed',
-            bottom: '10px',
-            right: '10px',
-            padding: '10px',
+            bottom: '3vh',
+            right: '2vw',
+            padding: '1.2vw',
             backgroundColor: '#007bff',
             color: 'white',
             borderRadius: '5px',
+            fontSize: 'clamp(0.4rem, 1vw, 1.2rem)',
             boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)'
         }}>
             <p style={{ margin: 0 }}>

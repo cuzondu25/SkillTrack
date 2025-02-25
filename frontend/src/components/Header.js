@@ -1,10 +1,108 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, Button, } from '@mui/material';
+import { IconButton, Menu, MenuItem, SvgIcon } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
     const { user } = useAuth();
+    const [anchorEl, setAnchorEl] = useState(null);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
+
+    function MenuIcon(props) {
+        return (
+          <SvgIcon {...props} viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </SvgIcon>
+        );
+    };
+      
+
+    const menuItems = [
+        { text: 'Home', link: '/' },
+        { text: 'Courses', link: '/courses' },
+        user && user.role === 'admin' && { text: 'Manage Courses', link: '/admin/courses' },
+        user && user.role === 'user' && { text: 'Enrolled', link: '/courses/enrolled' },
+        user && user.role === 'user' && { text: 'Completed', link: '/courses/completed' },
+        { text: 'About', link: '/about' },
+        user ? { text: 'Logout', link: '/logout' } : { text: 'Login', link: '/login' },
+    ].filter(Boolean); // Filter out null values
+
+
+    return (
+        <AppBar position="static" sx={{ mb: 4, bgcolor: 'primary.main' }}>
+            <Toolbar>
+                <Typography
+                    variant="h5"
+                    component={Link}
+                    to="/"
+                    sx={{
+                        flexGrow: 1,
+                        textDecoration: 'none',
+                        color: 'inherit',
+                    }}
+                >
+                    SkillTrack
+                </Typography>
+                {isMobile ? (
+                    <>
+                        <IconButton
+                            edge="start"
+                            color="white"
+                            aria-label="menu"
+                            onClick={handleMenuOpen}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                        >
+                            {menuItems.map((item) => (
+                                <MenuItem
+                                    key={item.text}
+                                    component={Link}
+                                    to={item.link}
+                                    onClick={handleMenuClose}
+                                >
+                                    {item.text}
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </>
+                ) : (
+                    <Box>
+                        {menuItems.map((item) => (
+                            <Button
+                                key={item.text}
+                                component={Link}
+                                to={item.link}
+                                color="inherit"
+                                sx={{ textTransform: 'none', fontWeight: 'bold' }}
+                            >
+                                {item.text}
+                            </Button>
+                        ))}
+                    </Box>
+                )}
+            </Toolbar>
+        </AppBar>
+    );
+};
+
+/*
     return (
         <AppBar position="static" sx={{ mb: 4, bgcolor: 'primary.main'}}>
             <Toolbar>
@@ -101,6 +199,6 @@ const Header = () => {
             </Toolbar>
         </AppBar>
     );
-};
+}; */
 
 export default Header;

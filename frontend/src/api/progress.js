@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/progress';
+const API_URL = 'https://cuzondu25.pythonanywhere.com/api/progress';
 
 export const getProgress = async (token) => {
     const response = await Axios.get(`${API_URL}/`, {

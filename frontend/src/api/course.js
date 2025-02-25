@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/course';
+const API_URL = 'https://cuzondu25.pythonanywhere.com/api/course';
 
 export const fetchCourses = async () => {
     const response = await Axios.get(`${API_URL}/courses`);

@@ -51,9 +51,12 @@ const CourseMaterials = () => {
                                         </a>
                                     </Typography>
                                 </CardContent>
-                                <CardActions>
-                                    <Button color="error" onClick={() => handleDelete(material.id)}>Delete</Button>
-                                </CardActions>
+
+			        {user && user.role === 'admin' && (
+                                    <CardActions>
+                                        <Button color="error" onClick={() => handleDelete(material.id)}>Delete</Button>
+                                    </CardActions>
+                                )}
                             </Card>
                         </Grid>
                     ))}

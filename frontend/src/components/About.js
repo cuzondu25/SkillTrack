@@ -25,7 +25,7 @@ const About = () => {
           About the Developer
         </Typography>
         <Typography variant="body1" sx={{ lineHeight: 1.8 }}>
-          Hello, I'm <strong>Uzondu Chidiebube Godwin</strong>, a full stack software 
+          Hello, I am <strong>Uzondu Chidiebube Godwin</strong>, a full stack software 
           engineering student at <strong>Alx Africa</strong>, the passionate mind behind
           <strong> SkillTrack</strong>. My expertise lies in building
           user-centric web applications that solve real-world challenges. With
